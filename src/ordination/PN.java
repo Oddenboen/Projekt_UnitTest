@@ -1,10 +1,21 @@
 package ordination;
 
 import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
+import java.util.ArrayList;
+import java.util.List;
 
-public class PN {
+public class PN extends Ordination{
 
-    private double antalEnheder;
+    private double antalEnheder = 0; //TODO implementer Lægemiddel for at denne kan bruges.
+    private int antalGangeGivet = 0;
+    private LocalDate foersteGivning;
+    private List<LocalDate> dageGivet = new ArrayList<>();
+
+    public PN(LocalDate startDate, LocalDate slutDate, double antal) {
+        super(startDate,slutDate);
+        antalEnheder = antal;
+    }
 
     /**
      * Registrerer at der er givet en dosis paa dagen givesDen
@@ -14,19 +25,25 @@ public class PN {
      * @return
      */
     public boolean givDosis(LocalDate givesDen) {
-        // TODO
-        return false;   
+        if (givesDen.isAfter(getStartDen()) && givesDen.isBefore(getSlutDen())) {
+            antalGangeGivet++;
+            if (foersteGivning == null) {
+                foersteGivning = LocalDate.now();
+            }
+            dageGivet.add(LocalDate.now());
+            return true;
+        }
+        throw new RuntimeException("Dato er ude for Ordinationen");
     }
 
     public double doegnDosis() {
-        // TODO
-        return 0.0;
+        LocalDate senesteGivning = dageGivet.getLast();
+        return (getAntalGangeGivet() * getAntalEnheder()) / (ChronoUnit.DAYS.between(foersteGivning,senesteGivning));
     }
 
 
     public double samletDosis() {
-        // TODO
-        return 0.0;
+        return getAntalGangeGivet() * getAntalEnheder();
     }
 
     /**
@@ -34,12 +51,15 @@ public class PN {
      * @return
      */
     public int getAntalGangeGivet() {
-        // TODO
-        return-1;
+        return antalGangeGivet;
     }
 
     public double getAntalEnheder() {
         return antalEnheder;
     }
 
+    @Override
+    public String getType() {
+        return "PN";
+    }
 }
