@@ -7,7 +7,7 @@ import java.util.List;
 
 public class PN extends Ordination{
 
-    private double antalEnheder = 0; //TODO implementer Lægemiddel for at denne kan bruges.
+    private double antalEnheder = 0;
     private int antalGangeGivet = 0;
     private LocalDate foersteGivning;
     private List<LocalDate> dageGivet = new ArrayList<>();
@@ -33,7 +33,7 @@ public class PN extends Ordination{
             dageGivet.add(LocalDate.now());
             return true;
         }
-        throw new RuntimeException("Dato er ude for Ordinationen");
+        throw new IllegalArgumentException("Dato er ude for Ordinationen");
     }
 
     public double doegnDosis() {
