@@ -14,19 +14,8 @@ public class DagligSkaev extends Ordination {
     }
 
     public Dosis opretDosis(LocalTime tid, double antal) {
-        if (antal < 0) {
-            throw new IllegalArgumentException("Antal kan ikke være negativt");
-        }
-        if (doser.size() != 0) {
-            for (Dosis dose : doser) {
-                if (tid != dose.getTid()) {
-                    Dosis nyDose = new Dosis(tid, antal);
-                    if (!doser.contains(nyDose)) {
-                        doser.add(nyDose);
-                        return nyDose;
-                    }
-                }
-            }
+        if (antal <= 0) {
+            throw new IllegalArgumentException("Antal kan kun være positivt");
         }
         Dosis dosis = new Dosis(tid,antal);
         doser.add(dosis);

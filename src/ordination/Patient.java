@@ -46,8 +46,6 @@ public class Patient {
         this.vaegt = vaegt;
     }
 
-    //TODO: Metoder (med specifikation) til at vedligeholde link til Ordination
-
     @Override
     public String toString(){
         return navn + "  " + cprnr;
