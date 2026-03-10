@@ -10,11 +10,16 @@ public abstract class Ordination {
 
 
     public Ordination(LocalDate startDen, LocalDate slutDen) {
+        if (startDen.isAfter(slutDen)) {
+            throw new IllegalArgumentException("Start dato kan ikke være efter slut dato");
+        }
         this.startDen = startDen;
         this.slutDen = slutDen;
     }
 
     public void setLaegemiddel(Laegemiddel laegemiddel) {
+        if (laegemiddel == null)
+            throw new IllegalArgumentException("Lægemiddel kan ikke være null");
         this.laegemiddel = laegemiddel;
     }
 
@@ -37,6 +42,7 @@ public abstract class Ordination {
     public int antalDage() {
         return (int) ChronoUnit.DAYS.between(startDen, slutDen) + 1;
     }
+
 
     @Override
     public String toString() {

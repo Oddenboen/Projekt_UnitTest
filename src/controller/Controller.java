@@ -42,6 +42,7 @@ public class Controller {
         if (patient != null && laegemiddel != null && antal >= 0) {
             PN pn = new PN(startDen, slutDen, antal);
             patient.addOrdination(pn);
+            pn.setLaegemiddel(laegemiddel);
             return pn;
         }
 
@@ -65,8 +66,10 @@ public class Controller {
             DagligFast dagligFast = new DagligFast(startDen, slutDen);
             dagligFast.opretDosis(morgenAntal, middagAntal, aftenAntal, natAntal);
             patient.addOrdination(dagligFast);
+            dagligFast.setLaegemiddel(laegemiddel);
             return dagligFast;
         }
+
         throw new RuntimeException("Manglende information");
     }
 
@@ -88,13 +91,15 @@ public class Controller {
             throw new IllegalArgumentException("klokkeSlet array og antalEnheder array er ikke samme størrelse");
         }
         if (patient != null && laegemiddel != null) {
-            DagligSkaev dagligSkaev = new DagligSkaev(startDen, startDen);
+            DagligSkaev dagligSkaev = new DagligSkaev(startDen, slutDen);
+            dagligSkaev.setLaegemiddel(laegemiddel);
             patient.addOrdination(dagligSkaev);
             for (int i = 0; i < klokkeSlet.length; i++) {
                 dagligSkaev.opretDosis(klokkeSlet[i], antalEnheder[i]);
             }
             return dagligSkaev;
         }
+
         throw new RuntimeException("Fejl");
     }
 
