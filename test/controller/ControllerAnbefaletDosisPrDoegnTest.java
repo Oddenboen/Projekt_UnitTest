@@ -24,7 +24,7 @@ class ControllerAnbefaletDosisPrDoegnTest {
     @Test
     void TC1_vaegtUnder25() {
         patient.setVaegt(24.9);
-        double expected = laegemiddel.getEnhedPrKgPrDoegnLet();
+        double expected = laegemiddel.getEnhedPrKgPrDoegnLet() * patient.getVaegt();
         double actual = controller.anbefaletDosisPrDoegn(patient, laegemiddel);
 
         assertEquals(expected, actual);
@@ -33,7 +33,7 @@ class ControllerAnbefaletDosisPrDoegnTest {
     @Test
     void TC2_vaegtEr25() {
         patient.setVaegt(25);
-        double expected = laegemiddel.getEnhedPrKgPrDoegnNormal();
+        double expected = laegemiddel.getEnhedPrKgPrDoegnNormal() * patient.getVaegt();
         double actual = controller.anbefaletDosisPrDoegn(patient, laegemiddel);
 
         assertEquals(expected, actual);
@@ -42,7 +42,7 @@ class ControllerAnbefaletDosisPrDoegnTest {
     @Test
     void TC3_vaegtEr120() {
         patient.setVaegt(120);
-        double expected = laegemiddel.getEnhedPrKgPrDoegnNormal();
+        double expected = laegemiddel.getEnhedPrKgPrDoegnNormal() * patient.getVaegt();
         double actual = controller.anbefaletDosisPrDoegn(patient, laegemiddel);
 
         assertEquals(expected, actual);
@@ -51,7 +51,7 @@ class ControllerAnbefaletDosisPrDoegnTest {
     @Test
     void TC4_vaegtOver120() {
         patient.setVaegt(120.1);
-        double expected = laegemiddel.getEnhedPrKgPrDoegnTung();
+        double expected = laegemiddel.getEnhedPrKgPrDoegnTung() * patient.getVaegt();
         double actual = controller.anbefaletDosisPrDoegn(patient, laegemiddel);
 
         assertEquals(expected, actual);
