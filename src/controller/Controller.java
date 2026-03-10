@@ -123,13 +123,13 @@ public class Controller {
         double vægt = patient.getVaegt();
         //Vægt grænserne er under 25, og over 120
         if (vægt < 25) {
-            return laegemiddel.getEnhedPrKgPrDoegnLet();
+            return laegemiddel.getEnhedPrKgPrDoegnLet() * vægt;
         }
         if (vægt > 120) {
-            return laegemiddel.getEnhedPrKgPrDoegnTung();
+            return laegemiddel.getEnhedPrKgPrDoegnTung() * vægt;
         }
 
-        return laegemiddel.getEnhedPrKgPrDoegnNormal();
+        return laegemiddel.getEnhedPrKgPrDoegnNormal() * vægt;
     }
 
     /**
