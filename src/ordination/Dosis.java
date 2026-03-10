@@ -6,8 +6,8 @@ public class Dosis {
     private LocalTime tid;
     private double antal;
 
-    public Dosis(LocalTime tid, double antal) {
-        super();
+    Dosis(LocalTime tid, double antal) {
+        //super();
         this.tid = tid;
         this.antal = antal;
     }

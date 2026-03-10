@@ -6,9 +6,26 @@ import java.time.temporal.ChronoUnit;
 public abstract class Ordination {
     private LocalDate startDen;
     private LocalDate slutDen;
+    private Laegemiddel laegemiddel;
 
-    // TODO Link til Laegemiddel
-    // TODO constructor (med specifikation)
+
+    public Ordination(LocalDate startDen, LocalDate slutDen) {
+        if (startDen.isAfter(slutDen)) {
+            throw new IllegalArgumentException("Start dato kan ikke være efter slut dato");
+        }
+        this.startDen = startDen;
+        this.slutDen = slutDen;
+    }
+
+    public void setLaegemiddel(Laegemiddel laegemiddel) {
+        if (laegemiddel == null)
+            throw new IllegalArgumentException("Lægemiddel kan ikke være null");
+        this.laegemiddel = laegemiddel;
+    }
+
+    public Laegemiddel getLaegemiddel() {
+        return laegemiddel;
+    }
 
     public LocalDate getStartDen() {
         return startDen;
@@ -25,6 +42,7 @@ public abstract class Ordination {
     public int antalDage() {
         return (int) ChronoUnit.DAYS.between(startDen, slutDen) + 1;
     }
+
 
     @Override
     public String toString() {

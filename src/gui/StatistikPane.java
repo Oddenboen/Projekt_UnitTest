@@ -73,7 +73,7 @@ public class StatistikPane extends GridPane {
 		try {
 			int vFra = Integer.valueOf(txfVægtFra.getText());
 			int vTil = Integer.valueOf(txfVægtTil.getText());
-			Laegemiddel lægemiddel = lstLægemidler.getSelectionModel()
+			Laegemiddel lægemiddel = (Laegemiddel) lstLægemidler.getSelectionModel()
 					.getSelectedItem();
 			int antal = controller.antalOrdinationerPrVægtPrLægemiddel(vFra, vTil,
 					lægemiddel);
